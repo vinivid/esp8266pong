@@ -29,7 +29,7 @@ html {background-color: black}
 
 #p1point{
     color: white;
-    font-size: 400%;
+    font-size: 5vw;
     position: absolute;
     left: 30vw;
     font-family: "OCR A Std", "DejaVu Sans Mono", monospace;
@@ -37,7 +37,7 @@ html {background-color: black}
 
 #p2point{
     color: white;
-    font-size: 400%;
+    font-size: 5vw;
     position: absolute;
     font-family: "OCR A Std", "DejaVu Sans Mono", monospace;
     right: 30vw;
