@@ -1,0 +1,12 @@
+#Lorem{
+    color: darkblue;
+}
+
+#rect1{
+    background-color: blue;
+    height: 50px;
+    width: 10px;
+    position: absolute;
+    left: 30px;
+    top: 300px;
+}
