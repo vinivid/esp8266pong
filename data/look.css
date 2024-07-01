@@ -2,7 +2,7 @@ html {background-color: black}
 
 #rect1{
     background-color: rgb(255, 255, 255);
-    height: 7vh;
+    height: 12.5vh;
     width: 0.7vw;
     position: absolute;
     left: 15vw;
@@ -11,10 +11,19 @@ html {background-color: black}
 
 #rect2{
     background-color: rgb(255, 255, 255);
-    height: 7vh;
+    height: 12.5vh;
     width: 0.7vw;
     position: absolute;
-    right: 15vw;
+    left: 85vw;
+    top: 50vh;
+}
+
+#ball{
+    background-color: white;
+    height: 2.655vh;
+    width: 0.84375vw;
+    position: absolute;
+    left: 50vw;
     top: 50vh;
 }
 
@@ -27,11 +36,28 @@ html {background-color: black}
     width: 0.5vw;
 }
 
+#limitTop{
+    background-color: white;
+    width: 100vw;
+    height: 1vh;
+    position: absolute;
+    top: 13.7vh;
+}
+
+#limitBottom{
+    background-color: white;
+    width: 100vw;
+    height: 1vh;
+    position: absolute;
+    top: 92.2vh;
+}
+
 #p1point{
     color: white;
     font-size: 3.5vw;
     position: absolute;
     left: 30vw;
+    top: -3vh;
     font-family: "OCR A Std", "DejaVu Sans Mono", monospace;
 }
 
@@ -41,4 +67,5 @@ html {background-color: black}
     position: absolute;
     font-family: "OCR A Std", "DejaVu Sans Mono", monospace;
     right: 30vw;
+    top: -3vh;
 }
