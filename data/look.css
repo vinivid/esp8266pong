@@ -41,7 +41,7 @@ html {background-color: black}
     width: 100vw;
     height: 1vh;
     position: absolute;
-    top: 13.7vh;
+    top: 14vh;
 }
 
 #limitBottom{
@@ -49,12 +49,12 @@ html {background-color: black}
     width: 100vw;
     height: 1vh;
     position: absolute;
-    top: 92.2vh;
+    top: 92.5vh;
 }
 
 #p1point{
     color: white;
-    font-size: 3.5vw;
+    font-size: 7vmin;
     position: absolute;
     left: 30vw;
     top: -3vh;
@@ -63,7 +63,7 @@ html {background-color: black}
 
 #p2point{
     color: white;
-    font-size: 3.5vw;
+    font-size: 7vmin;
     position: absolute;
     font-family: "OCR A Std", "DejaVu Sans Mono", monospace;
     right: 30vw;

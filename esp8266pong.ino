@@ -11,15 +11,15 @@ const char* passWord = "123456789";
 //inicializa um instancia servidor no port 80
 AsyncWebServer server(80);
 
-int pin1 = 5;
-int pin2 = 4;
-int pin5 = 14;
-int pin6 = 12;
+int pinP1Up = 5;
+int pinP1Down = 4;
+int pinP2Up = 0;
+int pinP2Down = 2;
 
 void setup(){
   Serial.begin(9600);
 
-  /*Inicia o WiFi no modo de soft acess point
+  /*Inicia o WiFi no modo de soft acess point que permite ao usuario acessar a ESP8266 sabendo a senha e o SSID
   */
   WiFi.softAP(ssid, passWord);
   IPAddress IP = WiFi.softAPIP();
@@ -40,6 +40,8 @@ void setup(){
     Serial.println("Erro ao abrir littleFS"); return;
   }
 
+
+  //Trata todos os pedidos de arquivo ou de estado
   server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
     request->send(LittleFS, "/index.html");
     Serial.println("Sucess html");
@@ -56,22 +58,30 @@ void setup(){
   });
 
   server.on("/p1", HTTP_GET, [](AsyncWebServerRequest *request){
-    if(digitalRead(pin2) == HIGH){
-      request->send_P(200, "text/plain", "1");
-      Serial.println("kinda");
-    }else if(digitalRead(pin6) == HIGH){
+    if(digitalRead(pinP1Up) == HIGH && digitalRead(pinP1Down) == HIGH){
+      request->send_P(204, "text/plain", "0");
+    }else if(digitalRead(pinP1Up) == HIGH ){
       request->send_P(200, "text/plain", "-1");
-      Serial.print("neg");
+    }else if(digitalRead(pinP1Down) == HIGH){
+      request->send_P(200, "text/plain", "1");
+    }else request->send_P(204, "text/plain", "0");
+  });
+
+  server.on("/p2", HTTP_GET, [](AsyncWebServerRequest *request){
+    if(digitalRead(pinP2Up) == HIGH && digitalRead(pinP2Down) == HIGH){
+      request->send_P(204, "text/plain", "0");
+    }else if(digitalRead(pinP2Up) == HIGH ){
+      request->send_P(200, "text/plain", "-1");
+    }else if(digitalRead(pinP2Down) == HIGH){
+      request->send_P(200, "text/plain", "1");
     }else request->send_P(204, "text/plain", "0");
   });
 }
 
 void loop(){
-  digitalWrite(pin1, HIGH);
-  delay(300);
-  digitalWrite(pin1, LOW);
-  digitalWrite(pin5, HIGH);
-  delay(300);
-  digitalWrite(pin5, LOW);
+  /*Não é necessario colocar algo no loop considerando que os dados só seram madados quando pedidos e se no momento
+  de serem pedidos estavam sendo processados.
+  Essa é a vantagem de escolher a biblioteca de servidor assincrono.
+  */
 }
 
