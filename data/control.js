@@ -48,12 +48,12 @@ function moveP1(yMoveDir){
     if(posP1 <= 130){
         if(yMoveDir == 1){
             TposP1 += 20 * (yMoveDir);
-            let intervalAnim = setInterval(moveFunc, 2);
+            let intervalAnim = setInterval(moveFunc, 1);
             let count = 0;
     
             function moveFunc(){
-                if(count == 4) clearInterval(intervalAnim);
-                posP1 += 5 * (yMoveDir);
+                if(count == 8) clearInterval(intervalAnim);
+                posP1 += 2.5 * (yMoveDir);
                 count += 1;
                 rect.style.top = posP1;
             }
@@ -64,13 +64,14 @@ function moveP1(yMoveDir){
         let relativePos = posP1 - 110;
 
 
-        TposP1 += relativePos * (yMoveDir);
-        let intervalAnim = setInterval(moveFunc, 2);
+        TposP1 = 110;
+        let intervalAnim = setInterval(moveFunc, 1);
         let count = 0;
+        qttMove = relativePos/4;
 
         function moveFunc(){
             if(count == 4) clearInterval(intervalAnim);
-            posP1 += (relativePos/4) * (yMoveDir);
+            posP1 += qttMove * (yMoveDir);
             count += 1;
             rect.style.top = posP1;
         }
@@ -78,12 +79,12 @@ function moveP1(yMoveDir){
     }else if(posP1 >= 680){
         if(yMoveDir == -1){
             TposP1 += 20 * (yMoveDir);
-            let intervalAnim = setInterval(moveFunc, 2);
+            let intervalAnim = setInterval(moveFunc, 1);
             let count = 0;
     
             function moveFunc(){
-                if(count == 4) clearInterval(intervalAnim);
-                posP1 += 5 * (yMoveDir);
+                if(count == 8) clearInterval(intervalAnim);
+                posP1 += 2.5 * (yMoveDir);
                 count += 1;
                 rect.style.top = posP1;
             }
@@ -94,55 +95,28 @@ function moveP1(yMoveDir){
         let relativePos = 700 - posP1 
 
 
-        TposP1 += relativePos * (yMoveDir);
-        let intervalAnim = setInterval(moveFunc, 2);
+        TposP1 = 700;
+        let intervalAnim = setInterval(moveFunc, 1);
         let count = 0;
+        let qttMove = (relativePos/4);
 
         function moveFunc(){
             if(count == 4) clearInterval(intervalAnim);
-            posP1 += (relativePos/4) * (yMoveDir);
+            posP1 += qttMove * (yMoveDir);
             count += 1;
             rect.style.top = posP1;
         }
-
     }else{
         TposP1 += 20 * (yMoveDir);
-        let intervalAnim = setInterval(moveFunc, 2);
+        let intervalAnim = setInterval(moveFunc, 1);
         let count = 0;
 
         function moveFunc(){
-            if(count == 4) clearInterval(intervalAnim);
-            posP1 += 5 * (yMoveDir);
+            if(count == 8) clearInterval(intervalAnim);
+            posP1 += 2.5 * (yMoveDir);
             count += 1;
             rect.style.top = posP1;
         }
-    }
-}
-
-function fmoveP1(qtdMove){
-    const rect = document.getElementById('rect1');
-    if(posP1 > 15 && posP1 < 80){
-        let yinterval = setInterval(moveP1y, 2);
-        let count = 0;
-        function moveP1y(){
-            if(count == 10){
-                count = 0;
-                clearInterval(yinterval);
-            }else{
-                //A barra sempre se enfia dentro do limite não importa o que faça
-                if(posP1 <= 15.4 || posP1 >= 80){
-                    count = 0;
-                    clearInterval(yinterval);
-                }
-                posP1 += (0.5)* qtdMove;
-                count += 1;
-                rect.style.top = posP1 + 'vh';
-            }
-        }
-    }else if(posP1 <= 15){
-        posP1 = 15.01;
-    }else{
-        posP1 = 79.9;
     }
 }
 
@@ -173,10 +147,122 @@ function moveP2(qtdMove){
     }
 }
 
+function moveP2(yMoveDir){
+    const rect = document.getElementById('rect2');
 
-document.addEventListener('keydown', (event)=>{
-    if(event.key == "w") moveP1('-1');
-    if(event.key == "s") moveP1('1');
-    if(event.key == "i") moveP2('-1');
-    if(event.key == "k") moveP2('1');
-})
+    //to avoid the bar entering or going beyond the limit
+    if(posP2 <= 130){
+        if(yMoveDir == 1){
+            TposP2 += 20 * (yMoveDir);
+            let intervalAnim = setInterval(moveFunc, 1);
+            let count = 0;
+    
+            function moveFunc(){
+                if(count == 8) clearInterval(intervalAnim);
+                posP2 += 2.5 * (yMoveDir);
+                count += 1;
+                rect.style.top = posP2;
+            }
+
+            return;
+        }
+
+        let relativePos = posP2 - 110;
+
+
+        TposP2 = 110;
+        let intervalAnim = setInterval(moveFunc, 1);
+        let count = 0;
+        qttMove = relativePos/4;
+
+        function moveFunc(){
+            if(count == 4) clearInterval(intervalAnim);
+            posP2 += qttMove * (yMoveDir);
+            count += 1;
+            rect.style.top = posP2;
+        }
+
+    }else if(posP2 >= 680){
+        if(yMoveDir == -1){
+            TposP2 += 20 * (yMoveDir);
+            let intervalAnim = setInterval(moveFunc, 1);
+            let count = 0;
+    
+            function moveFunc(){
+                if(count == 8) clearInterval(intervalAnim);
+                posP2 += 2.5 * (yMoveDir);
+                count += 1;
+                rect.style.top = posP2;
+            }
+
+            return;
+        }
+
+        let relativePos = 700 - posP2 
+
+
+        TposP2 = 700;
+        let intervalAnim = setInterval(moveFunc, 1);
+        let count = 0;
+        let qttMove = (relativePos/4);
+
+        function moveFunc(){
+            if(count == 4) clearInterval(intervalAnim);
+            posP2 += qttMove * (yMoveDir);
+            count += 1;
+            rect.style.top = posP2;
+        }
+    }else{
+        TposP2 += 20 * (yMoveDir);
+        let intervalAnim = setInterval(moveFunc, 1);
+        let count = 0;
+
+        function moveFunc(){
+            if(count == 8) clearInterval(intervalAnim);
+            posP2 += 2.5 * (yMoveDir);
+            count += 1;
+            rect.style.top = posP2;
+        }
+    }
+}
+
+let keysPressed = {};
+
+document.addEventListener('keydown', (e)=>{
+    keysPressed[e.key] = true;
+
+    if(keysPressed['w'] == true && keysPressed['i'] == true){
+        moveP1('-1'); moveP2('-1'); return;
+    }
+
+    if(keysPressed['w'] == true && keysPressed['k'] == true){
+        moveP1('-1'); moveP2('1'); return;
+    }
+
+    if(keysPressed['s'] == true && keysPressed['i'] == true){
+        moveP1('1'); moveP2('-1'); return;
+    }
+
+    if(keysPressed['s'] == true && keysPressed['k'] == true){
+        moveP1('1'); moveP2('1'); return;
+    }
+
+    if(keysPressed['w'] == true && keysPressed['s'] == false){
+        moveP1('-1'); return;
+    }
+    if(keysPressed['s'] == true&& keysPressed['w'] == false){
+        moveP1('1'); return;
+    } 
+    if(keysPressed['i'] == true && keysPressed['k'] == false){
+        moveP2('-1'); return;
+    }
+    if(keysPressed['k'] == true && keysPressed['i'] == false){
+        moveP2('1'); return;
+    }
+});
+
+document.addEventListener('keyup', (e)=>{
+    if(!e.repeat){
+        keysPressed[e.key] = false;
+    }
+});
