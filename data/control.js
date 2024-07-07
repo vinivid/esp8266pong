@@ -196,3 +196,18 @@ document.addEventListener('keyup', (e)=>{
         keysPressed[e.key] = false;
     }
 });
+
+if(!!window.EventSource){
+    var espEvent = new EventSource('/events');
+
+    console.log("reched here");
+    espEvent.addEventListener('buttonPress', (e)=>{
+        if(e.data == '-1p1') {
+            console.log('event received');
+            moveP1('-1');
+        }
+        if(e.data == '1p1') moveP1('1');
+        if(e.data == '-1p2') moveP2('-1');
+        if(e.data == '1p2') moveP2('1');
+    });
+}

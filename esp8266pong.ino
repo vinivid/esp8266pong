@@ -10,11 +10,12 @@ const char* passWord = "123456789";
 
 //inicializa um instancia servidor no port 80
 AsyncWebServer server(80);
+AsyncEventSource events("/events");
 
-int pinP1Up = 5;
-int pinP1Down = 4;
-int pinP2Up = 0;
-int pinP2Down = 2;
+int pinP1Up = 5;//D1
+int pinP1Down = 4;//D2
+int pinP2Up = 14;//D5
+int pinP2Down = 12;//D6
 
 void setup(){
   Serial.begin(9600);
@@ -27,10 +28,10 @@ void setup(){
   Serial.println(IP);
   Serial.println(WiFi.localIP());
 
-  pinMode(pin5, OUTPUT);
-  pinMode(pin1, OUTPUT);
-  pinMode(pin2, INPUT);
-  pinMode(pin6, INPUT);
+  pinMode(pinP1Up, INPUT);
+  pinMode(pinP1Down, INPUT);
+  pinMode(pinP2Up, INPUT);
+  pinMode(pinP2Down, INPUT);
 
   //Inicia o server
   server.begin();
@@ -40,8 +41,9 @@ void setup(){
     Serial.println("Erro ao abrir littleFS"); return;
   }
 
+  server.addHandler(&events);
 
-  //Trata todos os pedidos de arquivo ou de estado
+  //Sends the html, css and javascript to the interface
   server.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
     request->send(LittleFS, "/index.html");
     Serial.println("Sucess html");
@@ -57,31 +59,12 @@ void setup(){
     Serial.println("Sucess js");
   });
 
-  server.on("/p1", HTTP_GET, [](AsyncWebServerRequest *request){
-    if(digitalRead(pinP1Up) == HIGH && digitalRead(pinP1Down) == HIGH){
-      request->send_P(204, "text/plain", "0");
-    }else if(digitalRead(pinP1Up) == HIGH ){
-      request->send_P(200, "text/plain", "-1");
-    }else if(digitalRead(pinP1Down) == HIGH){
-      request->send_P(200, "text/plain", "1");
-    }else request->send_P(204, "text/plain", "0");
-  });
-
-  server.on("/p2", HTTP_GET, [](AsyncWebServerRequest *request){
-    if(digitalRead(pinP2Up) == HIGH && digitalRead(pinP2Down) == HIGH){
-      request->send_P(204, "text/plain", "0");
-    }else if(digitalRead(pinP2Up) == HIGH ){
-      request->send_P(200, "text/plain", "-1");
-    }else if(digitalRead(pinP2Down) == HIGH){
-      request->send_P(200, "text/plain", "1");
-    }else request->send_P(204, "text/plain", "0");
-  });
 }
 
 void loop(){
-  /*Não é necessario colocar algo no loop considerando que os dados só seram madados quando pedidos e se no momento
-  de serem pedidos estavam sendo processados.
-  Essa é a vantagem de escolher a biblioteca de servidor assincrono.
-  */
+  delay(110);
+  if(digitalRead(pinP1Up) == HIGH) events.send("-1p1", "buttonPress");
+  if(digitalRead(pinP1Down) == HIGH) events.send("1p1", "buttonPress");
+  if(digitalRead(pinP2Up) == HIGH) events.send("-1p2", "buttonPress");
+  if(digitalRead(pinP2Down) == HIGH) events.send("1p2", "buttonPress");
 }
-
