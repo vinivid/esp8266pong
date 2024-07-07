@@ -1,3 +1,7 @@
+/*Made vini
+https://github.com/vinivid
+*/
+
 //All units in px
 //there are problems on vertical mobile
 
