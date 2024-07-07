@@ -17,7 +17,12 @@ The esp8266 was not made for this kind of quick sucession updates to a web page 
 Here is a video of how it ended up looking:
 https://youtu.be/v2pJ3QE5VCQ
 
+## Image of the project
+
+<img src="./image/TBadPongImage.jpg">
+
 ## Libraries used:
 
 https://github.com/me-no-dev/ESPAsyncTCP
+
 https://github.com/me-no-dev/ESPAsyncWebServer
