@@ -57,7 +57,7 @@ html {background-color: black}
     color: white;
     font-size: 4rem;
     position: absolute;
-    left: 575px;
+    left: 500px;
     top: -40px;
     font-family: "OCR A Std", "DejaVu Sans Mono", monospace;
 }
@@ -67,6 +67,6 @@ html {background-color: black}
     font-size: 4rem;
     position: absolute;
     font-family: "OCR A Std", "DejaVu Sans Mono", monospace;
-    left: 1225px;
+    left: 1130px;
     top: -40px;
 }
